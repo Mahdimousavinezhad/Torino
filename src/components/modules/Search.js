@@ -1,6 +1,7 @@
 import { useState } from "react";
-// import { DatePicker } from "zaman";
-
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 import styles from "@/styles/Search.module.css";
 
 export default function Search() {
@@ -9,6 +10,7 @@ export default function Search() {
     end: "",
     date: [],
   });
+
   console.log(query);
 
   const changeHandler = (event) => {
@@ -41,7 +43,17 @@ export default function Search() {
           <option value="shiraz">شیراز</option>
         </select>
         <span>|</span>
-        {/* <DatePicker range onChange={(e) => console.log(e.from, e.to)} /> */}
+        <DatePicker
+          calendar={persian}
+          locale={persian_fa}
+          format={"YYYY/MM/DD"}
+          showOtherDays
+          placeholder="تاریخ"
+          range
+          onChange={(event) =>
+            setQuery((prev) => ({ ...prev, date: event.toString() }))
+          }
+        />
         <button className={styles.searchBtn}>جستجو</button>
       </form>
     </div>

@@ -1,8 +1,9 @@
 import styles from "@/styles/Card.module.css";
 import { sp } from "@/utils/replaceNumber";
+import Link from "next/link";
 
 function Card(props) {
-  const { image, title, price, options } = props;
+  const { id, image, title, price, options } = props;
   return (
     <div className={styles.card}>
       <img src={image} alt="Image" />
@@ -10,7 +11,7 @@ function Card(props) {
       <span>{options.join(",")}</span>
       <hr />
       <div>
-        <button>رزرو</button>
+        <Link href={`/tours/${id}`}>رزرو</Link>
         <div>
           <p>{sp(price)}</p>
           تومان
