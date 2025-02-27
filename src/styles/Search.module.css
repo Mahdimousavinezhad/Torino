@@ -2,7 +2,9 @@
   margin-top: 50px;
 }
 
-.searchBar form {
+.largeScreen {
+  display: flex;
+  align-items: center;
   margin-top: 50px;
   border: 1px solid gray;
   border-radius: 12px;
@@ -17,15 +19,15 @@
   color: #28a745;
 }
 
-/* .searchBar form span {
-  line-height: 40px;
-  width: 3px;
-  min-height: 50px;
+.underline {
+  width: 1px;
+  height: 50px;
+  margin: 0 10px;
   background-color: gray;
-} */
+}
 
-.searchBar select,
-.searchBar input {
+.largeScreen select,
+.largeScreen input {
   width: 200px;
   font-size: 1.1rem;
   margin: 0 12px;
@@ -41,6 +43,77 @@
   padding: 10px;
   background-color: #28a745;
   color: white;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
+}
+
+.smallScreen {
+  margin-top: 50px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.smallScreen > div:first-child {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.smallScreen select {
+  width: 200px;
+  height: 40px;
+  font-size: 1.1rem;
+  margin: 0 12px;
+  border: none;
+  outline: none;
+  padding: 7px 15px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.smallScreen input {
+  width: 420px;
+  padding: 7px 15px;
+  height: 40px;
+}
+
+.smallScreen > button:last-child {
+  display: block;
+  margin-top: 15px;
+  width: 100%;
+}
+
+@media screen and (max-width: 924px) {
+  .largeScreen {
+    display: none;
+  }
+  .smallScreen {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 474px) {
+  .smallScreen select {
+    width: 120px;
+  }
+  .smallScreen input {
+    width: 280px;
+  }
+  .smallScreen > button:last-child {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .smallScreen select {
+    width: 100px;
+  }
+  .smallScreen input {
+    width: 250px;
+  }
+  .smallScreen > button:last-child {
+    width: 60%;
+  }
 }

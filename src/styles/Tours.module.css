@@ -1,0 +1,22 @@
+.conatiner {
+  max-width: 1400px;
+  margin: 120px auto;
+}
+
+.conatiner h1 {
+  text-align: center;
+  color: orangered;
+}
+
+.cards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 689px) {
+  .cards {
+    justify-content: center;
+  }
+}
