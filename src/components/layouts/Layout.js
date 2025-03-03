@@ -1,12 +1,22 @@
+import { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
-import { useRef } from "react";
 
+import ModalManagement from "../templates/auth";
+import { openModalHandler, stepModalHandler } from "@/contexts/authModal";
 import { CloseIcon } from "../icons/Close";
 
 import styles from "@/styles/Layout.module.css";
+import { useProfile } from "@/hooks/queries";
+import { deleteCookie } from "@/utils/cookies";
 
 function Layout({ children }) {
   const menuRef = useRef(null);
+  const router = useRouter();
+  const [isOpen, setIsOpen] = openModalHandler();
+  const [step, setStep] = stepModalHandler();
+  const { data: userData } = useProfile();
+  console.log(userData);
 
   const sidebarOpen = () => {
     menuRef.current.className = styles.menu_open;
@@ -15,9 +25,47 @@ function Layout({ children }) {
   const sidebarClose = () => {
     menuRef.current.className = styles.menu_close;
   };
+
+  useEffect(() => {
+    const pathname = router.pathname;
+
+    if (pathname === "/dashboard" && userData === undefined) {
+      router.push("/");
+    } else if (router.query.modal === "login" && userData) {
+      setIsOpen(false);
+      router.push("/");
+    } else if (router.query.modal === "verify" && userData) {
+      setIsOpen(false);
+      router.push("/");
+    }
+
+    console.log(router.pathname);
+  }, [router.pathname, router.query]);
+
+  useEffect(() => {
+    const modalQuery = router.query?.modal;
+    if (modalQuery === "login" && !userData) {
+      setIsOpen(true);
+      setStep(1);
+    } else if (modalQuery === "verify" && !userData) {
+      setIsOpen(true);
+      setStep(2);
+    }
+  }, [router.query]);
+
+  const loginHandler = () => {
+    setStep(1);
+    setIsOpen(true);
+  };
+
+  const logoutHandler = () => {
+    deleteCookie();
+    router.reload();
+  };
   return (
     <>
       <header className={styles.header}>
+        <ModalManagement />
         <section className={styles.largeScreen}>
           <div>
             <img src="/images/torino.png" alt="Torino" />
@@ -38,12 +86,41 @@ function Layout({ children }) {
               </li>
             </ul>
           </div>
-          <div className={styles.login}>
-            <Link href="#">
+          {userData ? (
+            <div className={styles.dropDown}>
+              <div>
+                <img src="/images/profile.png" alt="Profile" />
+                {userData.mobile}
+                <img src="/images/arrow-down.png" alt="Arrow" />
+              </div>
+              <ul>
+                <li>
+                  <Link href="#">
+                    <img src="/images/profile (1).png" alt="Profile" />
+                    <span>{userData.mobile}</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#">
+                    <img src="/images/profile (2).png" alt="Profile" />
+                    <span>اطلاعات حساب کاربری</span>
+                  </Link>
+                </li>
+                <hr />
+                <li>
+                  <Link href="/" onClick={logoutHandler}>
+                    <img src="/images/logout.png" alt="Logout" />
+                    <span>خروج از حساب کاربری</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className={styles.login} onClick={loginHandler}>
               <img src="/images/profile.png" alt="Profile" />
               ورود | ثبت نام
-            </Link>
-          </div>
+            </div>
+          )}
         </section>
         <section className={styles.smallScreen}>
           <div>
@@ -79,9 +156,42 @@ function Layout({ children }) {
             </ul>
           </div>
           <div>
-            <Link href="#">
-              <img src="/images/signin.png" alt="Login" />
-            </Link>
+            {userData ? (
+              <div className={styles.dropDown}>
+                <div>
+                  <img src="/images/profile.png" alt="Profile" />
+                  {userData.mobile}
+                  <img src="/images/arrow-down.png" alt="Arrow" />
+                </div>
+                <ul>
+                  <li>
+                    <Link href="#">
+                      <img src="/images/profile (1).png" alt="Profile" />
+                      <span>{userData.mobile}</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <img src="/images/profile (2).png" alt="Profile" />
+                      <span>اطلاعات حساب کاربری</span>
+                    </Link>
+                  </li>
+                  <hr />
+                  <li>
+                    <Link href="/" onClick={logoutHandler}>
+                      <img src="/images/logout.png" alt="Logout" />
+                      <span>خروج از حساب کاربری</span>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <img
+                src="/images/signin.png"
+                alt="Login"
+                onClick={loginHandler}
+              />
+            )}
           </div>
         </section>
       </header>

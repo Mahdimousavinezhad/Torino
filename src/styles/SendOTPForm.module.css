@@ -1,0 +1,52 @@
+.modal {
+  width: 100%;
+  direction: ltr;
+  padding: 5px 15px;
+  transition: all 0.4s;
+}
+
+.modal svg {
+  width: 35px;
+  color: red;
+  text-align: end;
+  cursor: pointer;
+}
+
+.modal h1 {
+  text-align: center;
+}
+
+.modal form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.modal label {
+  text-align: end;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.modal input {
+  padding: 7px 10px;
+  margin-top: 10px;
+  height: 50px;
+  border: 1px solid gray;
+  border-radius: 7px;
+  font-size: 1.2rem;
+  outline: none;
+}
+
+.modal button {
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  padding: 10px;
+  margin-top: 15px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}

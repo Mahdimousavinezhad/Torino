@@ -31,12 +31,80 @@
   color: #28a745;
 }
 
-.login a {
+.login {
   padding: 7px 15px;
   font-size: 1.2rem;
   color: #28a745;
   border: 2px solid #28a745;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.dropDown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dropDown > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  color: #28a745;
+}
+
+.dropDown > div:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dropDown ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  padding: 15px 10px;
+  min-width: 200px;
+  min-height: 150px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.dropDown:hover ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropDown ul li {
+  padding: 8px 12px;
+  margin: 4px 0;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.dropDown ul li:last-child {
+  color: red;
+}
+
+.dropDown ul li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dropDown ul li span {
+  margin: 0 4px;
+}
+
+.dropDown ul li a {
   display: flex;
   align-items: center;
 }
