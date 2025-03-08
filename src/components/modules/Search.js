@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import styles from "@/styles/Search.module.css";
 import "react-multi-date-picker/styles/colors/green.css";
@@ -45,7 +45,6 @@ export default function Search() {
 
   return (
     <div className={styles.searchBar}>
-      <Toaster />
       <h2>
         <span>تورینو</span> برگزار کننده بهترین تور های داخلی و خارجی
       </h2>

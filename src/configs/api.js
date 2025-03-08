@@ -27,18 +27,16 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error?.response?.status === 401 && !originalRequest._retry) {
+    if (error.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       const res = await getNewToken();
-      if (res?.response?.status === 201) {
-        setCookie({
-          accessToken: res.accessToken,
-          refreshToken: res.refreshToken,
-        });
+      if (res?.response?.status === 200) {
+        setCookie("accessToken", res?.response?.data?.accessToken, 30);
         return api(originalRequest);
       } else {
-        setCookie({});
+        setCookie("accessToken", "", 0);
+        setCookie("refreshToken", "", 0);
       }
     }
     return Promise.reject(error);
@@ -53,9 +51,14 @@ const getNewToken = async () => {
   if (!refreshToken) return;
 
   try {
-    const response = await api.post("/auth/refresh-token", { refreshToken });
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/auth/refresh-token`,
+      { refreshToken }
+    );
     return { response };
   } catch (error) {
     return { error };
   }
 };
+
+export { getNewToken };

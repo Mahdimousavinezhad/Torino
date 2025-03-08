@@ -11,6 +11,23 @@
   margin-top: 110px;
 }
 
+.cardsSec > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardsSec > div:first-child a {
+  font-size: 1.3rem;
+  transition: all 0.4s;
+  color: #28a745;
+}
+
+.cardsSec > div:first-child a:hover {
+  transform: scale(1.1);
+  border-bottom: 1px solid gray;
+}
+
 .cardsSec h1 {
   margin-right: 30px;
 }

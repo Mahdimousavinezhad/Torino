@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
+
 import { CloseIcon } from "@/components/icons/Close";
 import { useRegister } from "@/hooks/mutations";
 
 import styles from "@/styles/SendOTPForm.module.css";
-import toast, { Toaster } from "react-hot-toast";
 
 function SendOTPForm({ setIsOpen, number, setNumber, setStep }) {
   const router = useRouter();
@@ -18,11 +19,19 @@ function SendOTPForm({ setIsOpen, number, setNumber, setStep }) {
     event.preventDefault();
     const phoneRegex = /^09\d{9}$/;
 
+    if (isPending) {
+      toast("چند لحظه صبر کنید!", {
+        icon: "👏",
+      });
+      return;
+    }
+
     if (!number) {
       toast.error("شماره خود را به صورت کامل وارد کنید!");
       return;
     } else if (!phoneRegex.test(number)) {
       toast.error("یک شماره معتبر وارد کنید!");
+      return;
     } else {
       mutate(number, {
         onSuccess: (data) => {
@@ -41,7 +50,6 @@ function SendOTPForm({ setIsOpen, number, setNumber, setStep }) {
 
   return (
     <div className={styles.modal}>
-      <Toaster />
       <CloseIcon onClick={closeHandler} />
       <h1>ورود به تورینو</h1>
       <form action="">

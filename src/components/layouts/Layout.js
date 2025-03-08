@@ -9,6 +9,8 @@ import { CloseIcon } from "../icons/Close";
 import styles from "@/styles/Layout.module.css";
 import { useProfile } from "@/hooks/queries";
 import { deleteCookie } from "@/utils/cookies";
+import { getNewToken } from "@/configs/api";
+import { Toaster } from "react-hot-toast";
 
 function Layout({ children }) {
   const menuRef = useRef(null);
@@ -38,8 +40,6 @@ function Layout({ children }) {
       setIsOpen(false);
       router.push("/");
     }
-
-    console.log(router.pathname);
   }, [router.pathname, router.query]);
 
   useEffect(() => {
@@ -64,22 +64,25 @@ function Layout({ children }) {
   };
   return (
     <>
+      <Toaster />
       <header className={styles.header}>
         <ModalManagement />
         <section className={styles.largeScreen}>
           <div>
-            <img src="/images/torino.png" alt="Torino" />
+            <Link href="/">
+              <img src="/images/torino.png" alt="Torino" />
+            </Link>
           </div>
           <div>
             <ul className={styles.navlist}>
               <li>
-                <Link href="#">صفحه ی اصلی</Link>
+                <Link href="/">صفحه ی اصلی</Link>
               </li>
               <li>
-                <Link href="#">خدمات گردشگری</Link>
+                <Link href="/tours">خدمات گردشگری</Link>
               </li>
               <li>
-                <Link href="#">درباره ما</Link>
+                <a href="#footer">درباره ما</a>
               </li>
               <li>
                 <Link href="#">تماس باما</Link>
@@ -197,7 +200,7 @@ function Layout({ children }) {
       </header>
       <main className={styles.main}>{children}</main>
       <hr />
-      <footer className={styles.footer}>
+      <footer className={styles.footer} id="footer">
         <section>
           <section className={styles.options}>
             <div>

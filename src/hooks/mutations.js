@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import api from "@/configs/api";
 
@@ -9,9 +9,14 @@ const useRegister = () => {
 };
 
 const useVerifyRegister = () => {
-  const mutationFn = (data) => api.post("/auth/check-otp", data);
+  const queryClient = useQueryClient();
 
-  return useMutation({ mutationFn });
+  const mutationFn = (data) => api.post("/auth/check-otp", data);
+  const onSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: ["get-profile"] });
+  };
+
+  return useMutation({ mutationFn, onSuccess });
 };
 
 export { useRegister, useVerifyRegister };

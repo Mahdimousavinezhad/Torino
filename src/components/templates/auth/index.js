@@ -47,12 +47,7 @@ function ModalManagement() {
       )}
       {step === 2 && (
         <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen} setStep={setStep}>
-          <CheckOTPForm
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            number={number}
-            setNumber={setNumber}
-          />
+          <CheckOTPForm isOpen={isOpen} setIsOpen={setIsOpen} number={number} />
         </ModalContainer>
       )}
     </>

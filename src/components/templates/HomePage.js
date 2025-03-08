@@ -4,6 +4,7 @@ import Search from "../modules/Search";
 
 import styles from "@/styles/HomePage.module.css";
 import Slider from "../modules/Slider";
+import Link from "next/link";
 
 function HomePage({ tours }) {
   return (
@@ -12,7 +13,10 @@ function HomePage({ tours }) {
       <div className={styles.main}>
         <Search />
         <div className={styles.cardsSec}>
-          <h1>همه ی تورها</h1>
+          <div>
+            <h1>بهترین تورها</h1>
+            <Link href="/tours">تماشای همه تورها</Link>
+          </div>
           <div className={styles.cards}>
             {tours.map((tour) => (
               <Card key={tour.id} {...tour} />
