@@ -1,14 +1,14 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
-import ProfilePage from "@/components/templates/dashboard/ProfilePage";
+import ToursPage from "@/components/templates/dashboard/ToursPage";
 
-function Dashboard() {
+function Tours() {
   return (
     <div>
       <DashboardLayout>
-        <ProfilePage />
+        <ToursPage />
       </DashboardLayout>
     </div>
   );
 }
 
-export default Dashboard;
+export default Tours;

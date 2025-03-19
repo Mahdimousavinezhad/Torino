@@ -1,0 +1,53 @@
+.container {
+  background-color: white;
+  max-width: 1000px;
+  min-height: 250px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid gray;
+}
+
+.container > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container form {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.smallScreen {
+  display: none;
+}
+
+.container form input,
+.container form select {
+  width: 262px;
+  height: 50px;
+  margin: 10px 20px;
+  padding: 10px;
+  font-size: 1.2rem;
+  border: 1px solid gray;
+  border-radius: 7px;
+  outline: none;
+}
+
+@media screen and (max-width: 693px) {
+  .container form input,
+  .container form select {
+    width: 100%;
+  }
+  .container form div {
+    min-width: 96%;
+  }
+  .largeScreen {
+    display: none;
+  }
+  .smallScreen {
+    display: block;
+  }
+}

@@ -12,7 +12,8 @@ function SendOTPForm({ setIsOpen, number, setNumber, setStep }) {
 
   const closeHandler = () => {
     setIsOpen(false);
-    router.push("/");
+    // router.push("/");
+    delete router.query.modal;
   };
 
   const sendHandler = (event) => {

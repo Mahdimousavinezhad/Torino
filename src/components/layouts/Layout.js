@@ -9,7 +9,6 @@ import { CloseIcon } from "../icons/Close";
 import styles from "@/styles/Layout.module.css";
 import { useProfile } from "@/hooks/queries";
 import { deleteCookie } from "@/utils/cookies";
-import { getNewToken } from "@/configs/api";
 import { Toaster } from "react-hot-toast";
 
 function Layout({ children }) {
@@ -17,8 +16,7 @@ function Layout({ children }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = openModalHandler();
   const [step, setStep] = stepModalHandler();
-  const { data: userData } = useProfile();
-  console.log(userData);
+  const { data: userData, isLoading } = useProfile();
 
   const sidebarOpen = () => {
     menuRef.current.className = styles.menu_open;
@@ -31,7 +29,9 @@ function Layout({ children }) {
   useEffect(() => {
     const pathname = router.pathname;
 
-    if (pathname === "/dashboard" && userData === undefined) {
+    if (isLoading) return;
+
+    if (pathname === "/dashboard" && !userData) {
       router.push("/");
     } else if (router.query.modal === "login" && userData) {
       setIsOpen(false);
@@ -98,13 +98,13 @@ function Layout({ children }) {
               </div>
               <ul>
                 <li>
-                  <Link href="#">
+                  <Link href="/dashboard">
                     <img src="/images/profile (1).png" alt="Profile" />
                     <span>{userData.mobile}</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="#">
+                  <Link href="/dashboard">
                     <img src="/images/profile (2).png" alt="Profile" />
                     <span>اطلاعات حساب کاربری</span>
                   </Link>

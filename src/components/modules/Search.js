@@ -18,8 +18,6 @@ export default function Search() {
     date: [],
   });
 
-  console.log(query);
-
   const changeHandler = (event) => {
     setQuery((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };

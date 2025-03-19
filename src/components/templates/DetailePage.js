@@ -1,10 +1,14 @@
+import { useReservation } from "@/hooks/mutations";
 import styles from "@/styles/DetailePage.module.css";
 import { sp } from "@/utils/replaceNumber";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 function DetailePage({ data }) {
-  console.log(data);
+  const router = useRouter();
 
   const {
+    id,
     image,
     price,
     startDate,
@@ -18,6 +22,21 @@ function DetailePage({ data }) {
 
   const timeDiff = new Date(endDate) - new Date(startDate);
   const finalDate = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+  const { mutate } = useReservation();
+
+  const reservationHandler = () => {
+    mutate(id, {
+      onSuccess: (data) => {
+        console.log(data);
+        toast.success("تور شما با موفقیت به سبدخرید اضافه شد!");
+        router.push("/cart");
+      },
+      onError: (data) => {
+        console.log(data);
+      },
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -77,7 +96,7 @@ function DetailePage({ data }) {
                 <h2>{sp(price)}</h2>
                 <p>هزار تومان</p>
               </div>
-              <button>رزرو و خرید</button>
+              <button onClick={reservationHandler}>رزرو و خرید</button>
             </div>
           </div>
         </div>

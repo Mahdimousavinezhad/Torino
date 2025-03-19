@@ -5,8 +5,6 @@ import styles from "@/styles/Tours.module.css";
 import { useEffect, useState } from "react";
 
 function Tours(props) {
-  console.log(props);
-
   const [error, setError] = useState("");
 
   useEffect(() => {

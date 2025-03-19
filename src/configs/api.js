@@ -60,5 +60,3 @@ const getNewToken = async () => {
     return { error };
   }
 };
-
-export { getNewToken };

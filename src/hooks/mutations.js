@@ -19,4 +19,16 @@ const useVerifyRegister = () => {
   return useMutation({ mutationFn, onSuccess });
 };
 
-export { useRegister, useVerifyRegister };
+const useReservation = () => {
+  const mutationFn = (tourId) => api.put(`/basket/${tourId}`);
+
+  return useMutation({ mutationFn });
+};
+
+const useOrder = () => {
+  const mutationFn = (data) => api.post(`/order`, data);
+
+  return useMutation({ mutationFn });
+};
+
+export { useRegister, useVerifyRegister, useReservation, useOrder };

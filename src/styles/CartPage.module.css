@@ -1,0 +1,19 @@
+.container {
+  background-color: #f3f3f3;
+  padding: 50px 0;
+  height: 100vh;
+}
+
+.subContainer {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 693px) {
+  .subContainer {
+    flex-wrap: wrap;
+  }
+}

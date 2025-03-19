@@ -5,7 +5,8 @@ function ModalContainer({ children, isOpen, setIsOpen, setStep }) {
   const router = useRouter();
 
   const closeBackground = () => {
-    router.push("/");
+    // router.push("/");
+    delete router.query.modal;
     setStep(1);
     setIsOpen(false);
   };
