@@ -1,7 +1,7 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import ToursPage from "@/components/templates/dashboard/ToursPage";
 
-function Tours() {
+function MyTours() {
   return (
     <div>
       <DashboardLayout>
@@ -11,4 +11,4 @@ function Tours() {
   );
 }
 
-export default Tours;
+export default MyTours;

@@ -1,7 +1,19 @@
 .container {
   max-width: 1400px;
   display: flex;
-  align-items: center;
+  align-items: top;
   justify-content: space-between;
-  margin: auto;
+  margin: 20px auto;
+}
+
+.children {
+  width: 100%;
+  margin: 0 25px;
+}
+
+
+@media screen and (max-width:837px) {
+  .container {
+    flex-direction: column;
+  }
 }

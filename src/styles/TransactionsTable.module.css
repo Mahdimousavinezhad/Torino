@@ -1,0 +1,50 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container table {
+  width: 100%;
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid gray;
+  border-radius: 12px;
+}
+
+.container table thead {
+  background-color: #f3f3f3;
+}
+
+.container table thead tr th {
+  padding: 20px;
+}
+
+.container table tbody tr td {
+  padding: 15px;
+  font-size: 1.1rem;
+}
+
+.container table tbody tr td:last-child {
+  display: flex;
+  align-items: center;
+  gap: 0 5px;
+}
+
+.container table tbody tr:hover {
+  background-color: #d0cdcd;
+}
+
+@media screen and (max-width: 480px) {
+  .type {
+    display: none;
+  }
+  .container table tbody tr td:last-child {
+    display: block;
+  }
+  .container table tbody tr td:last-child p:first-child {
+    display: none;
+  }
+}

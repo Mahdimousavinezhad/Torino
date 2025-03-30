@@ -15,14 +15,14 @@ export default function AuthModal({ children }) {
   );
 }
 
-const openModalHandler = () => {
+const useOpenModalHandler = () => {
   const { isOpen, setIsOpen } = useContext(AuthModalContext);
   return [isOpen, setIsOpen];
 };
 
-const stepModalHandler = () => {
+const useStepModalHandler = () => {
   const { step, setStep } = useContext(AuthModalContext);
   return [step, setStep];
 };
 
-export { openModalHandler, stepModalHandler };
+export { useOpenModalHandler, useStepModalHandler };

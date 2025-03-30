@@ -1,7 +1,7 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import ProfilePage from "@/components/templates/dashboard/ProfilePage";
 
-function Dashboard() {
+function Profile() {
   return (
     <div>
       <DashboardLayout>
@@ -11,4 +11,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Profile;

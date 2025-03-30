@@ -4,14 +4,14 @@ import { useEffect } from "react";
 import ModalContainer from "@/components/container/ModalContainer";
 import SendOTPForm from "./SendOTPForm";
 import CheckOTPForm from "./CheckOTPForm";
-import { openModalHandler, stepModalHandler } from "@/contexts/authModal";
+import { useOpenModalHandler, useStepModalHandler } from "@/contexts/authModal";
 import { useRouter } from "next/router";
 
 function ModalManagement() {
   const router = useRouter();
 
-  const [step, setStep] = stepModalHandler();
-  const [isOpen, setIsOpen] = openModalHandler();
+  const [step, setStep] = useStepModalHandler();
+  const [isOpen, setIsOpen] = useOpenModalHandler();
   const [number, setNumber] = useState("");
 
   useEffect(() => {

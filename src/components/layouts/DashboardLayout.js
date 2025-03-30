@@ -8,7 +8,7 @@ function DashboardLayout({ children }) {
       <div>
         <DashboardSidebar />
       </div>
-      <div>{children}</div>
+      <div className={styles.children}>{children}</div>
     </div>
   );
 }

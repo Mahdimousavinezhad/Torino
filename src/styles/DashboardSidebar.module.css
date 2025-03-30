@@ -36,3 +36,52 @@
   color: white;
   font-weight: 600;
 }
+
+/* for small scrren  */
+
+.sidebarSmallScreen {
+  margin: 30px 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarSmallScreen ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 10px;
+  gap: 10px 15px;
+  list-style: none;
+}
+
+.sidebarSmallScreen ul li a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.2rem;
+  border-bottom: 1px solid gray;
+  padding: 5px;
+}
+
+.activeSm {
+  border-bottom: 2px solid #3ed461;
+}
+
+@media screen and (max-width: 837px) {
+  .sidebar {
+    display: none;
+  }
+  .sidebarSmallScreen {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebarSmallScreen ul li a {
+    font-size: 1rem;
+  }
+}

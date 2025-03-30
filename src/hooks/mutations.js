@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import api from "@/configs/api";
+import toast from "react-hot-toast";
 
 const useRegister = () => {
   const mutationFn = (mobile) => api.post("/auth/send-otp", { mobile });
@@ -31,4 +32,24 @@ const useOrder = () => {
   return useMutation({ mutationFn });
 };
 
-export { useRegister, useVerifyRegister, useReservation, useOrder };
+const useChangeAccInfo = () => {
+  const queryClient = useQueryClient();
+
+  const mutationFn = (data) => api.put("/user/profile", data);
+
+  const onSuccess = (data) => {
+    toast.success(data.message);
+    queryClient.invalidateQueries({ queryKey: ["get-profile"] });
+  };
+  const onError = (data) => console.log(data);
+
+  return useMutation({ mutationFn, onSuccess, onError });
+};
+
+export {
+  useRegister,
+  useVerifyRegister,
+  useReservation,
+  useOrder,
+  useChangeAccInfo,
+};

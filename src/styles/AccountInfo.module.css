@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 20px 10px;
+  margin-bottom: 25px;
+}
+
+.container h2 {
+  margin-bottom: 40px;
+}
+
+.subContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.subContainer div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subContainer div p:first-child {
+  margin: 0 15px;
+  color: gray;
+}
+
+.subContainer div:last-child {
+  cursor: pointer;
+}
+
+.subContainer div:last-child p {
+  color: #009eca;
+}

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import ModalManagement from "../templates/auth";
-import { openModalHandler, stepModalHandler } from "@/contexts/authModal";
+import { useOpenModalHandler, useStepModalHandler } from "@/contexts/authModal";
 import { CloseIcon } from "../icons/Close";
 
 import styles from "@/styles/Layout.module.css";
@@ -14,9 +14,9 @@ import { Toaster } from "react-hot-toast";
 function Layout({ children }) {
   const menuRef = useRef(null);
   const router = useRouter();
-  const [isOpen, setIsOpen] = openModalHandler();
-  const [step, setStep] = stepModalHandler();
-  const { data: userData, isLoading } = useProfile();
+  const [isOpen, setIsOpen] = useOpenModalHandler();
+  const [step, setStep] = useStepModalHandler();
+  const { data: userData, isLoading, isError } = useProfile();
 
   const sidebarOpen = () => {
     menuRef.current.className = styles.menu_open;
@@ -31,7 +31,7 @@ function Layout({ children }) {
 
     if (isLoading) return;
 
-    if (pathname === "/dashboard" && !userData) {
+    if (pathname === "/dashboard" && isError) {
       router.push("/");
     } else if (router.query.modal === "login" && userData) {
       setIsOpen(false);

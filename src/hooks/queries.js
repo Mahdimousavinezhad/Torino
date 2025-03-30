@@ -16,4 +16,18 @@ const useCart = () => {
   return useQuery({ queryFn, queryKey });
 };
 
-export { useProfile, useCart };
+const useGetMyTours = () => {
+  const queryFn = () => api.get("/user/tours");
+  const queryKey = ["get-userTours"];
+
+  return useQuery({ queryFn, queryKey });
+};
+
+const useGetMyTransactions = () => {
+  const queryFn = () => api.get("/user/transactions");
+  const queryKey = ["get-userTransactions"];
+
+  return useQuery({ queryFn, queryKey });
+};
+
+export { useProfile, useCart, useGetMyTours, useGetMyTransactions };

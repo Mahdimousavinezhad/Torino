@@ -1,11 +1,11 @@
-import styles from "@/styles/ModalContainer.module.css";
 import { useRouter } from "next/router";
+
+import styles from "@/styles/ModalContainer.module.css";
 
 function ModalContainer({ children, isOpen, setIsOpen, setStep }) {
   const router = useRouter();
 
   const closeBackground = () => {
-    // router.push("/");
     delete router.query.modal;
     setStep(1);
     setIsOpen(false);
