@@ -159,6 +159,12 @@
   color: red;
 }
 
+/* Main */
+
+.main {
+  min-height: 70vh ;
+}
+
 /* Footer */
 
 .footer section {
@@ -237,12 +243,6 @@
   padding: 5px;
   text-align: center;
   font-size: 1.1rem;
-}
-
-/* Main */
-
-.main {
-  min-height: 100vh;
 }
 
 /* Responsives */

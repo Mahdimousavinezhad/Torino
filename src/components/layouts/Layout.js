@@ -1,15 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Toaster } from "react-hot-toast";
 
 import ModalManagement from "../templates/auth";
 import { useOpenModalHandler, useStepModalHandler } from "@/contexts/authModal";
 import { CloseIcon } from "../icons/Close";
-
-import styles from "@/styles/Layout.module.css";
 import { useProfile } from "@/hooks/queries";
 import { deleteCookie } from "@/utils/cookies";
-import { Toaster } from "react-hot-toast";
+
+import styles from "@/styles/Layout.module.css";
 
 function Layout({ children }) {
   const menuRef = useRef(null);
@@ -17,6 +17,18 @@ function Layout({ children }) {
   const [isOpen, setIsOpen] = useOpenModalHandler();
   const [step, setStep] = useStepModalHandler();
   const { data: userData, isLoading, isError } = useProfile();
+  const [isOnline, setIsOnline] = useState(true);
+
+  useEffect(() => {
+    const status = navigator.onLine;
+    setIsOnline(status);
+
+    if (!isOnline) {
+      router.push("/networkConnection");
+    } else if (router.pathname === "/networkConnection" && isOnline) {
+      router.push("/");
+    }
+  }, [isOnline, router.pathname]);
 
   const sidebarOpen = () => {
     menuRef.current.className = styles.menu_open;
@@ -62,6 +74,7 @@ function Layout({ children }) {
     deleteCookie();
     router.reload();
   };
+
   return (
     <>
       <Toaster />

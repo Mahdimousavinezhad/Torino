@@ -16,7 +16,7 @@ function PaymentInfo({ userData, setPayStatus }) {
           <p>{userData?.shaba_code ? userData.shaba_code : "__"} </p>
         </div>
         <div>
-          <p>شماره کارت</p>
+          <p>شماره Cvv2</p>
           <p>{userData?.debitCard_code ? userData.debitCard_code : "__"}</p>
         </div>
         <div>
