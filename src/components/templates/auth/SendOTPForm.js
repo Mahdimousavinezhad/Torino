@@ -11,9 +11,15 @@ function SendOTPForm({ setIsOpen, number, setNumber, setStep }) {
   const { mutate, isPending } = useRegister();
 
   const closeHandler = () => {
+    setStep(1);
     setIsOpen(false);
-    // router.push("/");
-    delete router.query.modal;
+
+    const newQuery = { ...router.query };
+    delete newQuery.modal;
+
+    router.push({ pathname: router.pathname, query: newQuery }, undefined, {
+      shallow: true,
+    });
   };
 
   const sendHandler = (event) => {

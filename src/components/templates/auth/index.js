@@ -26,10 +26,14 @@ function ModalManagement() {
   }, [isOpen]);
 
   useEffect(() => {
-    if (isOpen && step === 1) {
-      router.push({ query: { modal: "login" } });
-    } else if (isOpen && step === 2) {
-      router.push({ query: { modal: "verify" } });
+    if (isOpen) {
+      const newQuery = {
+        ...router.query,
+        modal: step === 1 ? "login" : "verify",
+      };
+      router.push({ pathname: router.pathname, query: newQuery }, undefined, {
+        shallow: true,
+      });
     }
   }, [isOpen, step]);
 
@@ -47,7 +51,12 @@ function ModalManagement() {
       )}
       {step === 2 && (
         <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen} setStep={setStep}>
-          <CheckOTPForm isOpen={isOpen} setIsOpen={setIsOpen} number={number} />
+          <CheckOTPForm
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            setStep={setStep}
+            number={number}
+          />
         </ModalContainer>
       )}
     </>

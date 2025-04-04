@@ -1,14 +1,15 @@
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 import { personalInfoSchema } from "@/schemas/dashboardSchema";
 import { useChangeAccInfo } from "@/hooks/mutations";
 
 import styles from "@/styles/PersonalInfoEdit.module.css";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import DatePicker from "react-multi-date-picker";
+import "react-multi-date-picker/styles/layouts/mobile.css";
 
 function PersonalInfoEdit({ userData, setPerStatus }) {
   const {
@@ -67,7 +68,7 @@ function PersonalInfoEdit({ userData, setPerStatus }) {
           />
           <p className={styles.error}>{errors.nationalCode?.message}</p>
         </div>
-        <div>
+        <div className={styles.largeScreen}>
           <Controller
             control={control}
             name="reactDatePicker"
@@ -75,6 +76,23 @@ function PersonalInfoEdit({ userData, setPerStatus }) {
               <DatePicker
                 onChange={onChange}
                 className="green"
+                calendar={persian}
+                locale={persian_fa}
+                placeholder="تاریخ"
+                rangeHover
+              />
+            )}
+          />
+          <p className={styles.error}>{errors.birthDate?.message}</p>
+        </div>
+        <div className={styles.smallScreen}>
+          <Controller
+            control={control}
+            name="reactDatePicker"
+            render={({ field: { onChange } }) => (
+              <DatePicker
+                onChange={onChange}
+                className="green  rmdp-mobile"
                 calendar={persian}
                 locale={persian_fa}
                 placeholder="تاریخ"

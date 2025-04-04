@@ -13,8 +13,8 @@ export default function Search() {
   const router = useRouter();
 
   const [query, setQuery] = useState({
-    start: "",
-    end: "",
+    originId: "",
+    destinationId: "",
     date: [],
   });
 
@@ -24,8 +24,9 @@ export default function Search() {
 
   const handleDateChange = (dates) => {
     const [start, end] = dates;
-    const startDate = new Date(start).toLocaleDateString("US");
-    const endDate = new Date(end).toLocaleDateString("US");
+
+    const startDate = start?.toDate().toISOString();
+    const endDate = end?.toDate().toISOString();
 
     setQuery((prev) => ({ ...prev, date: [startDate, endDate] }));
   };
@@ -33,12 +34,17 @@ export default function Search() {
   const searchHandler = (event) => {
     event.preventDefault();
 
-    if (!query.start || !query.end || query.date.length <= 0) {
+    if (!query.originId || !query.destinationId || query.date.length <= 0) {
       toast.error("لطفا تمامی فیلتر ها رو ست کنید!");
       return;
     }
 
     router.push({ pathname: "/tours", query });
+
+    // router.push({
+    //   pathname: "/tours",
+    //   query: `originId=${query.originId}&destinationId=${query.destinationId}&startDate=${query.date[0]}&endDate=${query.date[1]}`,
+    // });
   };
 
   return (
@@ -48,20 +54,34 @@ export default function Search() {
       </h2>
       {/* for large screen  */}
       <form className={styles.largeScreen}>
-        <select name="start" value={query.start} onChange={changeHandler}>
+        <select name="originId" value={query.originId} onChange={changeHandler}>
           <option value="">مبدا</option>
-          <option value="Tehran">تهران</option>
-          <option value="Sananndaj">سنندج</option>
-          <option value="Tabriz">تبریز</option>
-          <option value="Shiraz">شیراز</option>
+          <option value="1">تهران</option>
+          <option value="2">سنندج</option>
+          <option value="3">مادرید</option>
+          <option value="4">اصفهان</option>
+          <option value="5">سلیمانیه</option>
+          <option value="6">هولر</option>
+          <option value="7">مازندران</option>
+          <option value="8">آفرود</option>
+          <option value="9">ایتالیا</option>
         </select>
         <div className={styles.underline}></div>
-        <select name="end" value={query.end} onChange={changeHandler}>
+        <select
+          name="destinationId"
+          value={query.destinationId}
+          onChange={changeHandler}
+        >
           <option value="">مقصد</option>
-          <option value="Tehran">تهران</option>
-          <option value="Sananndaj">سنندج</option>
-          <option value="Tabriz">تبریز</option>
-          <option value="Shiraz">شیراز</option>
+          <option value="1">تهران</option>
+          <option value="2">سنندج</option>
+          <option value="3">مادرید</option>
+          <option value="4">اصفهان</option>
+          <option value="5">سلیمانیه</option>
+          <option value="6">هولر</option>
+          <option value="7">مازندران</option>
+          <option value="8">آفرود</option>
+          <option value="9">ایتالیا</option>
         </select>
         <div className={styles.underline}></div>
         <DatePicker
@@ -80,19 +100,37 @@ export default function Search() {
       {/* for small screen */}
       <form className={styles.smallScreen}>
         <div>
-          <select name="start" value={query.start} onChange={changeHandler}>
+          <select
+            name="originId"
+            value={query.originId}
+            onChange={changeHandler}
+          >
             <option value="">مبدا</option>
-            <option value="Tehran">تهران</option>
-            <option value="Sananndaj">سنندج</option>
-            <option value="Tabriz">تبریز</option>
-            <option value="Shiraz">شیراز</option>
+            <option value="1">تهران</option>
+            <option value="2">سنندج</option>
+            <option value="3">مادرید</option>
+            <option value="4">اصفهان</option>
+            <option value="5">سلیمانیه</option>
+            <option value="6">هولر</option>
+            <option value="7">مازندران</option>
+            <option value="8">آفرود</option>
+            <option value="9">ایتالیا</option>
           </select>
-          <select name="end" value={query.end} onChange={changeHandler}>
+          <select
+            name="destinationId"
+            value={query.destinationId}
+            onChange={changeHandler}
+          >
             <option value="">مقصد</option>
-            <option value="Tehran">تهران</option>
-            <option value="Sananndaj">سنندج</option>
-            <option value="Tabriz">تبریز</option>
-            <option value="Shiraz">شیراز</option>
+            <option value="1">تهران</option>
+            <option value="2">سنندج</option>
+            <option value="3">مادرید</option>
+            <option value="4">اصفهان</option>
+            <option value="5">سلیمانیه</option>
+            <option value="6">هولر</option>
+            <option value="7">مازندران</option>
+            <option value="8">آفرود</option>
+            <option value="9">ایتالیا</option>
           </select>
         </div>
         <DatePicker

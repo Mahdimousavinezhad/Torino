@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
@@ -8,6 +8,7 @@ import { useOpenModalHandler, useStepModalHandler } from "@/contexts/authModal";
 import { CloseIcon } from "../icons/Close";
 import { useProfile } from "@/hooks/queries";
 import { deleteCookie } from "@/utils/cookies";
+import Authorization from "@/providers/Authorization";
 
 import styles from "@/styles/Layout.module.css";
 
@@ -16,19 +17,7 @@ function Layout({ children }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useOpenModalHandler();
   const [step, setStep] = useStepModalHandler();
-  const { data: userData, isLoading, isError } = useProfile();
-  const [isOnline, setIsOnline] = useState(true);
-
-  useEffect(() => {
-    const status = navigator.onLine;
-    setIsOnline(status);
-
-    if (!isOnline) {
-      router.push("/networkConnection");
-    } else if (router.pathname === "/networkConnection" && isOnline) {
-      router.push("/");
-    }
-  }, [isOnline, router.pathname]);
+  const { data: userData } = useProfile();
 
   const sidebarOpen = () => {
     menuRef.current.className = styles.menu_open;
@@ -37,33 +26,6 @@ function Layout({ children }) {
   const sidebarClose = () => {
     menuRef.current.className = styles.menu_close;
   };
-
-  useEffect(() => {
-    const pathname = router.pathname;
-
-    if (isLoading) return;
-
-    if (pathname === "/dashboard" && isError) {
-      router.push("/");
-    } else if (router.query.modal === "login" && userData) {
-      setIsOpen(false);
-      router.push("/");
-    } else if (router.query.modal === "verify" && userData) {
-      setIsOpen(false);
-      router.push("/");
-    }
-  }, [router.pathname, router.query]);
-
-  useEffect(() => {
-    const modalQuery = router.query?.modal;
-    if (modalQuery === "login" && !userData) {
-      setIsOpen(true);
-      setStep(1);
-    } else if (modalQuery === "verify" && !userData) {
-      setIsOpen(true);
-      setStep(2);
-    }
-  }, [router.query]);
 
   const loginHandler = () => {
     setStep(1);
@@ -78,6 +40,7 @@ function Layout({ children }) {
   return (
     <>
       <Toaster />
+      <Authorization />
       <header className={styles.header}>
         <ModalManagement />
         <section className={styles.largeScreen}>

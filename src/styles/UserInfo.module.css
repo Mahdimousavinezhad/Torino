@@ -14,26 +14,44 @@
 }
 
 .container form {
-  margin-top: 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 50px;
 }
 
-.smallScreen {
-  display: none;
+.container form > div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px 0;
 }
 
 .container form input,
 .container form select {
-  width: 262px;
+  width: 300px;
   height: 50px;
-  margin: 10px 20px;
-  padding: 10px;
-  font-size: 1.2rem;
+  padding: 13px 15px;
   border: 1px solid gray;
   border-radius: 7px;
   outline: none;
+  font-size: 1.1rem;
+}
+
+.container form input::placeholder {
+  text-align: start;
+}
+
+.error {
+  height: 30px;
+  text-align: center;
+  color: red;
+  font-size: 1.1rem;
+}
+
+.smallScreen {
+  display: none !important;
 }
 
 @media screen and (max-width: 693px) {
@@ -41,13 +59,16 @@
   .container form select {
     width: 100%;
   }
-  .container form div {
+  .container form > div {
     min-width: 96%;
   }
   .largeScreen {
-    display: none;
+    display: none !important;
   }
   .smallScreen {
-    display: block;
+    display: block !important;
+  }
+  .smallScreen > div {
+    min-width: 96%;
   }
 }

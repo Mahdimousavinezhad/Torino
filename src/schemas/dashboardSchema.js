@@ -6,7 +6,7 @@ const accountInfoSchema = yup.object({
 
 const personalInfoSchema = yup.object({
   fullName: yup.string("نام شما باید به صورت متن باشد!"),
-  nationalCode: yup.number("کدملی را به صورت عدد وارد کنید!"),
+  nationalCode: yup.number(),
   birthDate: yup.string(),
   gender: yup.string(),
 });
@@ -17,4 +17,18 @@ const paymentInfoSchema = yup.object({
   accountIdentifier: yup.string(),
 });
 
-export { accountInfoSchema, personalInfoSchema, paymentInfoSchema };
+const basketCartInfoSchema = yup.object({
+  fullName: yup
+    .string("نام شما باید به صورت متن باشد!")
+    .required("اسم خود را کامل وارد کنید"),
+  nationalCode: yup.string().required("کد ملی خود را کامل وارد کنید"),
+  birthDate: yup.string().required("تاریخ تولد خود را کامل وارد کنید"),
+  gender: yup.string().required("جنسیت خود را انتخاب کنید"),
+});
+
+export {
+  accountInfoSchema,
+  personalInfoSchema,
+  paymentInfoSchema,
+  basketCartInfoSchema,
+};

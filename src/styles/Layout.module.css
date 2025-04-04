@@ -162,7 +162,7 @@
 /* Main */
 
 .main {
-  min-height: 70vh ;
+  min-height: auto;
 }
 
 /* Footer */

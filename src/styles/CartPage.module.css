@@ -1,7 +1,7 @@
 .container {
   background-color: #f3f3f3;
   padding: 50px 0;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .subContainer {
@@ -15,5 +15,7 @@
 @media screen and (max-width: 693px) {
   .subContainer {
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
 }

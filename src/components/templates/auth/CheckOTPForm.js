@@ -10,7 +10,7 @@ import reSendHandler from "@/utils/resendCode";
 
 import styles from "@/styles/CheckOTPForm.module.css";
 
-function CheckOTPForm({ setIsOpen, number }) {
+function CheckOTPForm({ setIsOpen, number, setStep }) {
   const router = useRouter();
 
   const [code, setCode] = useState("");
@@ -53,8 +53,15 @@ function CheckOTPForm({ setIsOpen, number }) {
   };
 
   const closeHandler = () => {
+    setStep(1);
     setIsOpen(false);
-    router.push("/");
+
+    const newQuery = { ...router.query };
+    delete newQuery.modal;
+
+    router.push({ pathname: router.pathname, query: newQuery }, undefined, {
+      shallow: true,
+    });
   };
 
   const sendHandler = (event) => {

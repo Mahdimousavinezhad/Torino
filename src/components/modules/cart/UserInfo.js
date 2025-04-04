@@ -1,68 +1,82 @@
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import { Controller } from "react-hook-form";
 
-import styles from "@/styles/UserInfo.module.css";
 import "react-multi-date-picker/styles/colors/green.css";
 import "react-multi-date-picker/styles/layouts/mobile.css";
+import styles from "@/styles/UserInfo.module.css";
 
-function UserInfo({ userInfo, setUserInfo }) {
-  const changeHandler = (event) => {
-    setUserInfo((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-  const changeDateHandler = (date) => {
-    const formatedDate = new Date(date).toLocaleDateString("US");
-    setUserInfo((prev) => ({ ...prev, birthDate: formatedDate }));
-  };
-
+function UserInfo({ register, handleSubmit, errors, control, onSubmit }) {
   return (
     <div className={styles.container}>
       <div>
         <img src="/images/profile (3).png" alt="Profile" />
         <h1>مشخصات مسافر</h1>
       </div>
-      <form>
-        <input
-          type="text"
-          placeholder="نام و نام خانوادگی"
-          name="fullName"
-          onChange={changeHandler}
-        />
-        <input
-          type="number"
-          placeholder="کدملی"
-          name="nationalCode"
-          onChange={changeHandler}
-        />
-        <div className={styles.largeScreen}>
-          <DatePicker
-            className={"green"}
-            calendar={persian}
-            locale={persian_fa}
-            placeholder="تاریخ تولد"
-            name="birthDate"
-            onChange={changeDateHandler}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <input
+            type="text"
+            {...register("fullName")}
+            placeholder="نام و نام خانوادگی"
           />
+          <p className={styles.error}>{errors.fullName?.message}</p>
+        </div>
+        <div>
+          <input
+            type="text"
+            {...register("nationalCode")}
+            placeholder="کد ملی"
+          />
+          <p className={styles.error}>{errors.nationalCode?.message}</p>
+        </div>
+        <div className={styles.largeScreen}>
+          <Controller
+            control={control}
+            name="reactDatePicker"
+            render={({ field: { onChange } }) => (
+              <DatePicker
+                onChange={onChange}
+                className="green"
+                name="birthDate"
+                calendar={persian}
+                locale={persian_fa}
+                placeholder="تاریخ"
+                rangeHover
+              />
+            )}
+          />
+          <p className={styles.error}>{errors.birthDate?.message}</p>
         </div>
         <div className={styles.smallScreen}>
-          <DatePicker
-            className={"green rmdp-mobile"}
-            calendar={persian}
-            locale={persian_fa}
-            placeholder="تاریخ تولد"
-            name="birthDate"
-            onChange={changeDateHandler}
+          <Controller
+            control={control}
+            name="reactDatePicker"
+            render={({ field: { onChange } }) => (
+              <DatePicker
+                onChange={onChange}
+                className="green rmdp-mobile"
+                name="birthDate"
+                calendar={persian}
+                locale={persian_fa}
+                placeholder="تاریخ"
+                rangeHover
+              />
+            )}
           />
+          <p className={styles.error}>{errors.birthDate?.message}</p>
         </div>
-        <select name="gender" onChange={changeHandler}>
-          <option value="">جنسیت</option>
-          <option value="female">زن</option>
-          <option value="male">مرد</option>
-        </select>
+        <div>
+          <select {...register("gender")}>
+            <option defaultValue value="">
+              جنسیت
+            </option>
+            <option value="female">زن</option>
+            <option value="male">مرد</option>
+          </select>
+          <p className={styles.error}>{errors.gender?.message}</p>
+        </div>
       </form>
     </div>
   );
